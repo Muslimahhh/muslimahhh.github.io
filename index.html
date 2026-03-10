@@ -74,7 +74,7 @@
       bottom: 0;
       display: flex;
       flex-direction: column;
-      z-index: 100;
+      z-index: 120;
       padding: 40px 0 32px;
       transition: transform var(--transition-slow);
     }
@@ -159,9 +159,22 @@
       padding: 20px 28px 0;
       border-top: 1px solid var(--border);
       display: flex;
-      gap: 16px;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .sidebar-signature {
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--ivory);
+      white-space: nowrap;
     }
 
+    .sidebar-copyright {
+      font-size: 13px;
+      color: var(--muted-light);
+      white-space: nowrap;
+    }
     .sidebar-social-link {
       color: var(--muted);
       text-decoration: none;
@@ -219,7 +232,7 @@
       width: var(--panel-w);
       background: var(--bg-elevated);
       border-left: 1px solid var(--border-light);
-      z-index: 200;
+      z-index: 500;
       transform: translateX(100%);
       transition: transform var(--transition-slow);
       overflow-y: auto;
@@ -1191,7 +1204,9 @@
       gap: 5px;
       cursor: pointer;
     }
-
+    body.panel-active .hamburger {
+      display: none !important;
+    }
     .hamburger span {
       display: block;
       width: 18px;
@@ -1206,26 +1221,12 @@
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.6);
-      z-index: 99;
+      z-index: 110;
       backdrop-filter: blur(2px);
     }
 
     .overlay.visible {
       display: block;
-    }
-
-    .sidebar-signature {
-      font-weight: 500;
-      font-size: 13px;
-      color: var(--text-primary);
-    }
-
-    .sidebar-note,
-    .sidebar-copyright {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: 4px;
-
     }
 
     /* ── RESPONSIVE ── */
@@ -1279,9 +1280,18 @@
       .sidebar.mobile-open {
         transform: translateX(0);
       }
+      .sidebar-footer {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
 
       .hamburger {
         display: flex;
+      }
+      
+      .panel-header {
+        padding-top: 72px;
       }
 
       .main-canvas {
@@ -1423,7 +1433,7 @@
     </nav>
 
     <div class="sidebar-footer">
-      <div class="sidebar-signature">Muslimah Sarumi</div>
+      <div class="sidebar-signature">Muslimah Sarumi  </div>
       <div class="sidebar-copyright">© 2026</div>
     </div>
   </aside>
@@ -3298,51 +3308,62 @@
       const data = panelData[id];
       if (!data) return;
 
+      closeMobileSidebar();
+
       document.getElementById('panel-cat').textContent = data.cat;
       document.getElementById('panel-title').textContent = data.title;
       document.getElementById('panel-subtitle').textContent = data.subtitle;
 
       let html = '';
+
       data.sections.forEach(s => {
-        html += `<div class="panel-section">
-      <div class="panel-section-label">${s.label}</div>
-      <div class="panel-section-text">${s.text}</div>
-    </div>`;
+        html += `
+          <div class="panel-section">
+            <div class="panel-section-label">${s.label}</div>
+            <div class="panel-section-text">${s.text}</div>
+          </div>
+        `;
       });
 
       if (data.tools && data.tools.length) {
-        html += `<div class="panel-section">
-      <div class="panel-section-label">Tools Used</div>
-      <div class="panel-tags">${data.tools.map(t => `<span class="panel-tag">${t}</span>`).join('')}</div>
-    </div>`;
+        html += `
+          <div class="panel-section">
+            <div class="panel-section-label">Tools Used</div>
+            <div class="panel-tags">
+              ${data.tools.map(t => `<span class="panel-tag">${t}</span>`).join('')}
+            </div>
+          </div>
+        `;
       }
 
       if (data.cta) {
         if (data.ctaPage) {
           if (data.ctaSection) {
-            html += `<div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--border);">
-          <button class="btn btn-primary btn-sm" onclick="navigate('${data.ctaPage}', null, '${data.ctaSection}')">${data.cta} →</button>
-        </div>`;
+            html += `
+              <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--border);">
+                <button class="btn btn-primary btn-sm" onclick="navigate('${data.ctaPage}', null, '${data.ctaSection}')">${data.cta} →</button>
+              </div>
+            `;
           } else {
-            html += `<div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--border);">
-          <button class="btn btn-primary btn-sm" onclick="navigate('${data.ctaPage}')">${data.cta} →</button>
-        </div>`;
+            html += `
+              <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--border);">
+                <button class="btn btn-primary btn-sm" onclick="navigate('${data.ctaPage}')">${data.cta} →</button>
+              </div>
+            `;
           }
         } else if (data.ctaUrl) {
-          html += `<div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--border);">
-        <a href="${data.ctaUrl}" class="btn btn-primary btn-sm" target="_blank">${data.cta} →</a>
-      </div>`;
+          html += `
+            <div style="margin-top:32px;padding-top:24px;border-top:1px solid var(--border);">
+              <a href="${data.ctaUrl}" class="btn btn-primary btn-sm" target="_blank">${data.cta} →</a>
+            </div>
+          `;
         }
       }
 
       document.getElementById('panel-body').innerHTML = html;
       document.getElementById('detail-panel').classList.add('open');
       document.getElementById('main-canvas').classList.add('panel-open');
-    }
-
-    function closePanel() {
-      document.getElementById('detail-panel').classList.remove('open');
-      document.getElementById('main-canvas').classList.remove('panel-open');
+      document.body.classList.add('panel-active');
     }
 
     // ── MOBILE SIDEBAR ──
@@ -3356,6 +3377,15 @@
       document.getElementById('overlay').classList.remove('visible');
     }
 
+    function closePanel() {
+      const panel = document.getElementById('detail-panel');
+      const canvas = document.getElementById('main-canvas');
+
+      if (panel) panel.classList.remove('open');
+      if (canvas) canvas.classList.remove('panel-open');
+
+      document.body.classList.remove('panel-active');
+    }
     // Close panel on ESC
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closePanel();
