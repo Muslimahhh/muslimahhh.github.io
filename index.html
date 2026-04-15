@@ -601,6 +601,11 @@
       flex-wrap: wrap;
     }
 
+    .hero-actions .btn {
+      flex: 0 0 auto;
+      width: auto;
+    }
+
     .hero-stats {
       display: flex;
       gap: 48px;
@@ -1509,7 +1514,7 @@
       <div class="hero">
         <h1 class="hero-headline">I build things. <em>Then I make sure they actually work.</em></h1>
         <p class="hero-body">
-          Hi. I'm Muslimah. I'm a software engineer with a background in full-stack development and a particular focus on AI-integrated products. I build across the stack — Python backends, React and Next.js frontends, REST APIs, cloud deployments — and I care about the quality of the system, not just whether it ships.
+          Hi. I'm Muslimah. I'm a software engineer with a background in full-stack development and a particular focus on AI-integrated products. I build across the stack: Python backends, React and Next.js frontends, REST APIs, cloud deployments. I care about the quality of the system, not just whether it ships.
         </p>
         <div class="hero-actions">
           <button class="btn btn-primary" onclick="navigate('product-work')">View Projects →</button>
@@ -1566,7 +1571,7 @@
 
       <div class="about-grid">
         <div class="about-body">
-          <p>I'm a software engineer with a BEng in Software Engineering and a background that spans full-stack development, AI integration, and product thinking. I build web applications end to end — from Python backends and REST APIs to React and Next.js frontends — and I care about the quality of the whole system, not just the layer I happen to be working on.</p>
+          <p>I'm a software engineer with a BEng in Software Engineering and a background that spans full-stack development, AI integration, and product thinking. I build web applications end to end: Python backends and REST APIs through to React and Next.js frontends. I care about the quality of the whole system, not just the layer I happen to be working on.</p>
 
           <p>Most of my recent work has been at the intersection of AI and product. I've built AI-integrated applications from scratch: designing the prompt architecture, separating generation logic from UI concerns, deploying to cloud platforms, and debugging things that break in production. I don't just wire up an API and call it done. I think carefully about how to constrain model behaviour, how to structure inputs so the output is actually useful, and where deterministic code serves the user better than leaving decisions to the model.</p>
 
@@ -1738,7 +1743,7 @@
         <div class="card reveal" onclick="openPanel('pw4')">
           <div class="card-eyebrow">B2B SaaS · Telecom Operations</div>
           <div class="card-title">CoreTel</div>
-          <div class="card-text">Unified dashboard concept for telecom resellers to manage subscriptions, SIP provisioning, and billing — designed around operational clarity and self-service workflows.</div>
+          <div class="card-text">Unified dashboard concept for telecom resellers to manage subscriptions, SIP provisioning, and billing, designed around operational clarity and self-service workflows.</div>
           <div class="card-footer">
             <span class="card-role-tag">Product & Engineering</span>
             <div class="card-arrow">→</div>
@@ -1794,7 +1799,7 @@
           <div class="cs-section reveal full-width">
             <div class="cs-section-title">Overview</div>
             <div class="cs-section-text">
-              <p>Du'a Companion is a full-stack AI web application I built solo, from initial concept through to production deployment. The app helps users who want to make du'a — personal Islamic prayer — but struggle to express what they're carrying in a way that feels specific and honest rather than generic.</p>
+              <p>Du'a Companion is a full-stack AI web application I built solo, from initial concept through to production deployment. The app helps users who want to make du'a (personal Islamic prayer) but struggle to express what they're carrying in a way that feels specific and honest, rather than generic.</p>
               <p>The user works through a guided form: what they're asking for, what has been heavy, what they fear, what answered du'a would look like. The system then selects 2–4 relevant Names of Allah, explains why each Name fits, and generates a du'a written in natural, emotionally specific language.</p>
               <p class="cs-highlight">This is not a generic Islamic quote generator. The entire system was designed around the goal of producing output that feels like it was written for this person, about this situation, right now.</p>
             </div>
@@ -3215,7 +3220,7 @@
         sections: [
           {
             label: 'What I Built',
-            text: "A full-stack web application that generates personalised Islamic du'as based on structured emotional input. The user describes what they're carrying — their request, fear, burden, and desired outcome — and the system selects relevant Names of Allah, explains each choice, and generates a du'a written in honest, natural language."
+            text: "A full-stack web application that generates personalised Islamic du'as based on structured emotional input. The user describes what they're carrying: their request, fear, burden, and desired outcome. The system the system selects relevant Names of Allah, explains each choice, and generates a du'a written in honest, natural language."
           },
           {
             label: 'Architecture',
@@ -3254,7 +3259,7 @@
           },
           {
             label: 'Technical Decisions',
-            text: 'The core engineering challenge was prompt design. Academic text simplification is easy to get wrong — models tend to either strip too much meaning or produce output that is just slightly less dense than the original. I iterated on the system prompt structure to enforce natural language, preserve the original concept, and remove unnecessary complexity without losing accuracy.'
+            text: 'The core engineering challenge was prompt design. Academic text simplification is easy to get wrong. Models tend to either strip too much meaning or produce output that is just slightly less dense than the original. I iterated on the system prompt structure to enforce natural language, preserve the original concept, and remove unnecessary complexity without losing accuracy.'
           },
           {
             label: 'Stack',
