@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Muslimah Sarumi — Product Manager</title>
+  <title>Muslimah Sarumi — Software Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap"
@@ -1272,15 +1272,11 @@
       }
     }
 
-    @media (max-width: 768px) {
+
       .sidebar {
         transform: translateX(-100%);
-        padding-top: 96px;
       }
-      .sidebar-brand{
-        padding: 0 28px 28px;
-        margin-bottom: 24px;
-      }
+
       .sidebar.mobile-open {
         transform: translateX(0);
       }
@@ -1355,10 +1351,73 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* ── ANIMATIONS ── */
+
+    /* Particles canvas sits behind everything */
+    #particles-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.45;
+    }
+
+    /* Scroll-reveal base state */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+                  transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Stagger delays for card grids */
+    .reveal-delay-1 { transition-delay: 0.08s; }
+    .reveal-delay-2 { transition-delay: 0.16s; }
+    .reveal-delay-3 { transition-delay: 0.24s; }
+    .reveal-delay-4 { transition-delay: 0.32s; }
+    .reveal-delay-5 { transition-delay: 0.40s; }
+    .reveal-delay-6 { transition-delay: 0.48s; }
+
+    /* Hero stagger */
+    .hero-label,
+    .hero-headline,
+    .hero-body,
+    .hero-actions,
+    .hero-stats {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: heroFadeUp 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+    .hero-label    { animation-delay: 0.1s; }
+    .hero-headline { animation-delay: 0.22s; }
+    .hero-body     { animation-delay: 0.38s; }
+    .hero-actions  { animation-delay: 0.52s; }
+    .hero-stats    { animation-delay: 0.68s; }
+
+    @keyframes heroFadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Skill bar fill — starts at 0, filled by JS */
+    .skill-fill {
+      width: 0% !important;
+      transition: width 1.1s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .skill-fill.filled {
+      /* width set inline by JS from data-width */
+    }
   </style>
 </head>
 
 <body>
+
+  <canvas id="particles-canvas"></canvas>
 
   <!-- HAMBURGER -->
   <div class="hamburger" id="hamburger" onclick="toggleMobileSidebar()">
@@ -1370,7 +1429,7 @@
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
       <div class="sidebar-brand-name">Muslimah Sarumi</div>
-      <div class="sidebar-brand-role">Product Manager</div>
+      <div class="sidebar-brand-role">Software Engineer</div>
     </div>
 
     <nav class="sidebar-nav">
@@ -1448,31 +1507,31 @@
     <!-- ── HOME ── -->
     <section class="page active" id="page-home">
       <div class="hero">
-        <h1 class="hero-headline">Building products that understand <em>the work they're meant to do.</em></h1>
+        <h1 class="hero-headline">I build things. <em>Then I make sure they actually work.</em></h1>
         <p class="hero-body">
-       Hi. I'm Muslimah. I'm a Product Manager with a software engineering background, focused on AI-powered products. I'm drawn to the intersection where intelligent systems meet real human needs: where the model is capable but the product around it is what makes it actually useful. I work across AI tools, SaaS platforms, and operational experiences, and I care about building things that feel considered, not just clever. 
+          Hi. I'm Muslimah. I'm a software engineer with a background in full-stack development and a particular focus on AI-integrated products. I build across the stack — Python backends, React and Next.js frontends, REST APIs, cloud deployments — and I care about the quality of the system, not just whether it ships.
         </p>
         <div class="hero-actions">
-          <button class="btn btn-primary" onclick="navigate('product-work')">View Product Work →</button>
+          <button class="btn btn-primary" onclick="navigate('product-work')">View Projects →</button>
           <button class="btn btn-ghost" onclick="navigate('case-studies')">Read Case Studies</button>
         </div>
 
         <div class="hero-stats">
           <div class="stat-item">
-            <span class="stat-num">3+</span>
-            <span class="stat-label">Years building product systems</span>
-          </div>
-          <div class="stat-item">
             <span class="stat-num">5+</span>
-            <span class="stat-label">Products shipped</span>
+            <span class="stat-label">Full-stack projects shipped</span>
           </div>
           <div class="stat-item">
-            <span class="stat-num">1000+</span>
-            <span class="stat-label">Users supported</span>
+            <span class="stat-num">3+</span>
+            <span class="stat-label">AI-integrated products built</span>
           </div>
           <div class="stat-item">
-            <span class="stat-num">4+</span>
-            <span class="stat-label">Teams worked with</span>
+            <span class="stat-num">2</span>
+            <span class="stat-label">Cloud platforms deployed to</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-num">BEng</span>
+            <span class="stat-label">Software Engineering</span>
           </div>
         </div>
       </div>
@@ -1484,20 +1543,17 @@
         <h2 class="section-title">What's here</h2>
       </div>
       <div class="card-grid card-grid-3 overview-cards">
-        <div class="overview-card" onclick="navigate('product-work')">
-          <div class="overview-card-title">Product Work</div>
-          <div class="overview-card-desc">The products I've worked on and the thinking behind them. The problems we were
-            solving, the trade-offs we made, and what it took to actually ship.</div>
+        <div class="overview-card reveal" onclick="navigate('product-work')">
+          <div class="overview-card-title">Projects</div>
+          <div class="overview-card-desc">Full-stack applications, AI-integrated tools, and production deployments. The problems I was solving, the architectural decisions I made, and what it actually took to ship.</div>
         </div>
-        <div class="overview-card" onclick="navigate('writing')">
+        <div class="overview-card reveal" onclick="navigate('writing')">
           <div class="overview-card-title">Writing</div>
-          <div class="overview-card-desc">Things I've written while trying to understand product, systems, and the messy
-            reality of building things with other people.</div>
+          <div class="overview-card-desc">Things I've written while trying to understand product, systems, and the messy reality of building things with other people.</div>
         </div>
-        <div class="overview-card" onclick="navigate('lab')">
+        <div class="overview-card reveal" onclick="navigate('lab')">
           <div class="overview-card-title">Lab</div>
-          <div class="overview-card-desc">Small experiments and prototypes. Ideas I wanted to explore, tools I wanted to
-            try, or questions I couldn't stop thinking about.</div>
+          <div class="overview-card-desc">Small experiments and prototypes. Ideas I wanted to explore, tools I wanted to try, or questions I couldn't stop thinking about.</div>
         </div>
       </div>
     </section>
@@ -1510,25 +1566,13 @@
 
       <div class="about-grid">
         <div class="about-body">
-          <p>I'm a Product Manager with a background in software engineering. I'm drawn to problems that sit between
-            systems and people, where thoughtful product decisions can turn complexity into something clear and usable.
-          </p>
+          <p>I'm a software engineer with a BEng in Software Engineering and a background that spans full-stack development, AI integration, and product thinking. I build web applications end to end — from Python backends and REST APIs to React and Next.js frontends — and I care about the quality of the whole system, not just the layer I happen to be working on.</p>
 
-          <p>My approach to product starts with understanding the problem properly. Before thinking about solutions, I
-            spend time learning how people actually work. The constraints they deal with, the workarounds they've built,
-            and the small decisions they make every day because the tools around them were never designed with them in
-            mind.</p>
+          <p>Most of my recent work has been at the intersection of AI and product. I've built AI-integrated applications from scratch: designing the prompt architecture, separating generation logic from UI concerns, deploying to cloud platforms, and debugging things that break in production. I don't just wire up an API and call it done. I think carefully about how to constrain model behaviour, how to structure inputs so the output is actually useful, and where deterministic code serves the user better than leaving decisions to the model.</p>
 
-          <p>I'm comfortable working in uncertainty. Most product work starts without perfect information, so I've
-            learned to move forward while still asking the right questions. For me, good product management is about
-            creating clarity for the people building the product, not just producing roadmaps for stakeholders.</p>
+          <p>I also spent time working as a Product Manager, which gave me something most engineers don't have: a clear sense of why something is being built before writing a line of code. I know how to read a problem, ask the right questions, and keep the user in mind when making technical decisions. That context makes me a better engineer, not a distracted one.</p>
 
-          <p>Outside of product, I enjoy reading, writing, and following ideas that help me understand how people learn
-            and interact with technology. I'm especially interested in tools that make complex things simpler and more
-            accessible. Most of the time, I'm either exploring a new idea, writing about something I've been thinking
-            about, or building a small experiment to see where it leads.</p>
-          
-          <p>Right now, I'm intentionally moving deeper into AI product work. I'm interested in the specific challenges that make AI products hard to get right: when to trust a model's output, how to design for failure gracefully, and how to make intelligent features feel intuitive rather than opaque. My engineering background means I can sit in a room with ML engineers and actually follow the conversation, and my PM experience means I know which conversations matter.</p>
+          <p>Outside of work, I write, build experiments, and follow ideas that sit at the edge of technology and human experience. Most of the time I'm either solving a problem I can't leave alone or shipping something that started as a question I couldn't answer any other way.</p>
 
           <div class="divider"></div>
 
@@ -1552,64 +1596,68 @@
           </div>
         </div>
         <div>
-          <div class="about-sidebar-block">
-            <div class="about-sidebar-title">Product Strengths</div>
+          <div class="about-sidebar-block reveal">
+            <div class="about-sidebar-title">Technical Skills</div>
             <div class="skill-list">
               <div class="skill-item">
-                <span>Product Discovery</span>
+                <span>Python / FastAPI</span>
                 <div class="skill-bar">
-                  <div class="skill-fill" style="width:88%"></div>
+                  <div class="skill-fill" data-width="88%"></div>
                 </div>
               </div>
               <div class="skill-item">
-                <span>SaaS Platform Workflows</span>
+                <span>JavaScript / TypeScript</span>
                 <div class="skill-bar">
-                  <div class="skill-fill" style="width:85%"></div>
+                  <div class="skill-fill" data-width="82%"></div>
                 </div>
               </div>
               <div class="skill-item">
-                <span>System & API Analysis</span>
+                <span>React / Next.js</span>
                 <div class="skill-bar">
-                  <div class="skill-fill" style="width:82%"></div>
+                  <div class="skill-fill" data-width="80%"></div>
                 </div>
               </div>
               <div class="skill-item">
-                <span>User Research & Validation</span>
+                <span>REST API Design</span>
                 <div class="skill-bar">
-                  <div class="skill-fill" style="width:80%"></div>
+                  <div class="skill-fill" data-width="85%"></div>
                 </div>
               </div>
               <div class="skill-item">
-                <span>Product Requirements</span>
+                <span>OpenAI API / LLM Integration</span>
                 <div class="skill-bar">
-                  <div class="skill-fill" style="width:83%"></div>
+                  <div class="skill-fill" data-width="87%"></div>
                 </div>
               </div>
               <div class="skill-item">
-                <span>Operational Data Analysis</span>
+                <span>Cloud Deployment (Vercel, Render)</span>
                 <div class="skill-bar">
-                  <div class="skill-fill" style="width:78%"></div>
+                  <div class="skill-fill" data-width="78%"></div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="about-sidebar-block">
-            <div class="about-sidebar-title">Tools & Methods</div>
+          <div class="about-sidebar-block reveal">
+            <div class="about-sidebar-title">Stack & Tools</div>
             <div style="display:flex;flex-wrap:wrap;gap:8px;">
-              <span class="panel-tag">Jira</span>
-              <span class="panel-tag">Postman</span>
-              <span class="panel-tag">Notion</span>
-              <span class="panel-tag">Airtable</span>
-              <span class="panel-tag">SQL</span>
               <span class="panel-tag">Python</span>
+              <span class="panel-tag">FastAPI</span>
+              <span class="panel-tag">JavaScript</span>
+              <span class="panel-tag">TypeScript</span>
+              <span class="panel-tag">React</span>
+              <span class="panel-tag">Next.js</span>
+              <span class="panel-tag">Tailwind CSS</span>
+              <span class="panel-tag">OpenAI API</span>
+              <span class="panel-tag">REST APIs</span>
+              <span class="panel-tag">Vercel</span>
+              <span class="panel-tag">Render</span>
               <span class="panel-tag">Streamlit</span>
               <span class="panel-tag">GitHub</span>
-              <span class="panel-tag">VS Code</span>
-              <span class="panel-tag">HTML</span>
-              <span class="panel-tag">CSS</span>
+              <span class="panel-tag">SQL</span>
+              <span class="panel-tag">Postman</span>
             </div>
           </div>
-          <div class="about-sidebar-block">
+          <div class="about-sidebar-block reveal">
             <div class="about-sidebar-title">Education</div>
             <div class="exp-list">
               <div class="exp-item">
@@ -1631,76 +1679,68 @@
     <!-- ── PRODUCT WORK ── -->
     <section class="page" id="page-product-work">
       <div class="section-eyebrow">Portfolio</div>
-      <h2 class="section-title">Product Work</h2>
-      <p class="section-lead">Some of the products I've had the chance to build and shape. Each one started with a messy
-        problem and ended with something real people now use.</p>
+      <h2 class="section-title">Projects</h2>
+      <p class="section-lead">Applications I've built end to end. Each one started with a real problem, involved genuine technical decisions, and ended with something deployed and working.</p>
       <div class="divider"></div>
 
       <div class="card-grid card-grid-2">
 
-        <div class="card" onclick="openPanel('pw1')">
-          <div class="card-eyebrow">AI · Learning Tools</div>
-          <div class="card-title">NeuroStudy Buddy</div>
-          <div class="card-text">An AI study companion built with the OpenAI API and prompt engineering. Designed to reduce reading friction for students with ADHD and dyslexia by transforming dense academic language into clearer explanations without losing meaning.</div>
+        <div class="card reveal" onclick="openPanel('pw_dua')">
+          <div class="card-eyebrow">Full-Stack · AI Integration</div>
+          <div class="card-title">Du'a Companion</div>
+          <div class="card-text">Full-stack AI web app with a Next.js frontend, FastAPI backend, and a multi-layer prompt system for generating personalised Islamic du'as. Deployed on Vercel and Render.</div>
           <div class="card-footer">
-            <span class="card-role-tag">Product Manager & Builder</span>
+            <span class="card-role-tag">Solo Build · Full-Stack</span>
             <div class="card-arrow">→</div>
           </div>
         </div>
 
-        <div class="card" onclick="openPanel('pw2')">
+        <div class="card reveal" onclick="openPanel('pw1')">
+          <div class="card-eyebrow">AI · Python · OpenAI API</div>
+          <div class="card-title">NeuroStudy Buddy</div>
+          <div class="card-text">Built a working AI prototype using Python, Streamlit, and the OpenAI API to simplify dense academic text for students with ADHD and dyslexia. Engineered prompts to preserve meaning while reducing reading friction.</div>
+          <div class="card-footer">
+            <span class="card-role-tag">Solo Build</span>
+            <div class="card-arrow">→</div>
+          </div>
+        </div>
+
+        <div class="card reveal" onclick="openPanel('pw5')">
+          <div class="card-eyebrow">AI · NLP · Python</div>
+          <div class="card-title">DetectHer</div>
+          <div class="card-text">Natural language classification tool using the OpenAI API and prompt engineering to surface misogynistic or abusive language in digital conversations.</div>
+          <div class="card-footer">
+            <span class="card-role-tag">Solo Build</span>
+            <div class="card-arrow">→</div>
+          </div>
+        </div>
+
+        <div class="card reveal" onclick="openPanel('pw2')">
           <div class="card-eyebrow">B2B SaaS · Workflow Systems</div>
           <div class="card-title">Enterprise Client Onboarding</div>
-          <div class="card-text">Redesigned onboarding workflows for a SaaS platform to streamline client activation and
-            reduce manual setup friction.</div>
+          <div class="card-text">Redesigned onboarding workflows for a SaaS platform, working directly with engineers and the founder to reduce manual setup friction and incomplete submissions.</div>
           <div class="card-footer">
-            <span class="card-role-tag">Associate Product Manager</span>
+            <span class="card-role-tag">Engineer + PM</span>
             <div class="card-arrow">→</div>
           </div>
         </div>
 
-        <div class="card" onclick="openPanel('pw3')">
+        <div class="card reveal" onclick="openPanel('pw3')">
           <div class="card-eyebrow">GovTech · Service Design</div>
           <div class="card-title">ClearPath</div>
-          <div class="card-text">Citizen-first platform designed to simplify access to social services by replacing
-            legacy PDF applications with accessible digital workflows.</div>
+          <div class="card-text">Citizen-first platform designed to simplify access to social services by replacing legacy PDF applications with accessible digital workflows.</div>
           <div class="card-footer">
-            <span class="card-role-tag">Product Designer & PM</span>
+            <span class="card-role-tag">Product & Engineering</span>
             <div class="card-arrow">→</div>
           </div>
         </div>
 
-        <div class="card" onclick="openPanel('pw4')">
+        <div class="card reveal" onclick="openPanel('pw4')">
           <div class="card-eyebrow">B2B SaaS · Telecom Operations</div>
           <div class="card-title">CoreTel</div>
-          <div class="card-text">Unified dashboard for telecom resellers to manage subscriptions, SIP provisioning, and
-            billing without relying on fragmented spreadsheets and email workflows.</div>
+          <div class="card-text">Unified dashboard concept for telecom resellers to manage subscriptions, SIP provisioning, and billing — designed around operational clarity and self-service workflows.</div>
           <div class="card-footer">
-            <span class="card-role-tag">Product Manager</span>
-            <div class="card-arrow">→</div>
-          </div>
-        </div>
-
-
-
-        <div class="card" onclick="openPanel('pw5')">
-          <div class="card-eyebrow">AI · Language Analysis</div>
-          <div class="card-title">DetectHer</div>
-          <div class="card-text">A natural language detection tool designed to identify misogynistic or abusive language
-            in digital conversations.</div>
-          <div class="card-footer">
-            <span class="card-role-tag">Product Manager</span>
-            <div class="card-arrow">→</div>
-          </div>
-        </div>
-
-        <div class="card" onclick="openPanel('pw6')">
-          <div class="card-eyebrow">EdTech · Mobile Systems</div>
-          <div class="card-title">Seamless Learning</div>
-          <div class="card-text">Mobile companion app designed to extend an existing learning platform with offline
-            lessons and cross-device progress syncing.</div>
-          <div class="card-footer">
-            <span class="card-role-tag">Product Manager</span>
+            <span class="card-role-tag">Product & Engineering</span>
             <div class="card-arrow">→</div>
           </div>
         </div>
@@ -1712,11 +1752,124 @@
     <section class="page" id="page-case-studies">
       <div class="section-eyebrow">Deep Dives</div>
       <h2 class="section-title">Case Studies</h2>
-      <p class="section-lead">A deeper look at selected projects, from the original problem to the decisions that shaped
-        the outcome. I also reflect on what worked, what did not, and what I would approach differently now.</p>
+      <p class="section-lead">A closer look at selected projects, including the architecture, the decisions that shaped them, and what I learned building them.</p>
       <div class="divider"></div>
 
-      <!-- CASE STUDY 1 -->
+      <!-- CASE STUDY 0 — DU'A COMPANION -->
+      <div id="dua-companion" class="case-study">
+
+        <div class="case-study-header">
+          <div>
+            <div class="card-eyebrow">Case Study 01 · Full-Stack · AI Integration</div>
+            <div class="case-study-title">Du'a Companion</div>
+            <div class="case-study-subtitle">A full-stack AI web application that generates personalised Islamic du'as based on structured emotional input and relevant Names of Allah.</div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <span class="panel-tag">Solo Build</span>
+              <span class="panel-tag">Full-Stack</span>
+              <span class="panel-tag">AI Integration</span>
+            </div>
+          </div>
+          <div class="case-study-meta">
+            <div class="cs-meta-item">
+              <span class="cs-meta-label">Stack</span>
+              <span class="cs-meta-value">Next.js · FastAPI · Python</span>
+            </div>
+            <div class="cs-meta-item">
+              <span class="cs-meta-label">Deployment</span>
+              <span class="cs-meta-value">Vercel (frontend) · Render (backend)</span>
+            </div>
+            <div class="cs-meta-item">
+              <span class="cs-meta-label">My role</span>
+              <span class="cs-meta-value">Solo engineer, full-stack</span>
+            </div>
+            <div class="cs-meta-item">
+              <span class="cs-meta-label">Timeline</span>
+              <span class="cs-meta-value">2024 – Present</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-study-body">
+
+          <div class="cs-section reveal full-width">
+            <div class="cs-section-title">Overview</div>
+            <div class="cs-section-text">
+              <p>Du'a Companion is a full-stack AI web application I built solo, from initial concept through to production deployment. The app helps users who want to make du'a — personal Islamic prayer — but struggle to express what they're carrying in a way that feels specific and honest rather than generic.</p>
+              <p>The user works through a guided form: what they're asking for, what has been heavy, what they fear, what answered du'a would look like. The system then selects 2–4 relevant Names of Allah, explains why each Name fits, and generates a du'a written in natural, emotionally specific language.</p>
+              <p class="cs-highlight">This is not a generic Islamic quote generator. The entire system was designed around the goal of producing output that feels like it was written for this person, about this situation, right now.</p>
+            </div>
+          </div>
+
+          <div class="cs-section">
+            <div class="cs-section-title">Architecture</div>
+            <div class="cs-section-text">
+              <p><strong>Frontend:</strong> Next.js with TypeScript, styled with Tailwind CSS, deployed on Vercel. Handles form flow, UI state, display of selected Names and generated du'a, and post-generation actions (copy, regenerate, edit answers, start over).</p>
+              <p><strong>Backend:</strong> FastAPI Python service deployed on Render. Receives structured input, runs the Name matching layer, builds the final prompt, calls the OpenAI API, parses and returns the output. The backend owns all generation logic.</p>
+              <p>I deliberately separated these concerns rather than doing everything in Next.js API routes. Keeping the Python generation logic in a proper backend service made it easier to reason about, easier to iterate on, and portable independent of the frontend.</p>
+            </div>
+          </div>
+
+          <div class="cs-section">
+            <div class="cs-section-title">The Name Matching System</div>
+            <div class="cs-section-text">
+              <p>This was one of the most important engineering decisions in the project. I did not let the model select Names of Allah freely from its training data. That produced results that were either too generic or spiritually off.</p>
+              <p>Instead, I built a deterministic Python matching layer. Each Name in the system has: Arabic form, transliteration, du'a invocation form, meaning, and associated themes.</p>
+              <p>The matcher runs keyword and implicit phrase matching against the user's input, with contextual exclusions to handle ambiguous terms. For example, the word "work" needed context handling so a phrase like "I want my cycle to work properly" would not incorrectly trigger Names related to provision or livelihood.</p>
+              <p class="cs-highlight">The matching layer improved relevance and consistency significantly compared to letting the model decide.</p>
+            </div>
+          </div>
+
+          <div class="cs-section">
+            <div class="cs-section-title">Prompt Engineering</div>
+            <div class="cs-section-text">
+              <p>The system prompt does a lot of work in this project. It constrains writing behaviour tightly across several dimensions: natural spoken language over essay-like prose, emotional specificity over generic religious language, no introducing themes the user did not mention, no ornate inspirational sentences, shorter lines with natural rhythm.</p>
+              <p>Output is wrapped in parse markers so the frontend can extract it reliably without accidental model commentary creeping in.</p>
+              <p>The hardest iteration challenge was prompt drift. LLM output consistently drifted toward polished inspirational prose that felt emotionally distant. Solving that took multiple rounds of tightening constraints and testing against real inputs until the output consistently felt honest rather than impressive.</p>
+            </div>
+          </div>
+
+          <div class="cs-section">
+            <div class="cs-section-title">Development Journey</div>
+            <div class="cs-section-text">
+              <p>I started with Streamlit deliberately. I wanted to validate that the prompt architecture and Name matching logic actually worked before investing time in a proper frontend. Streamlit let me iterate quickly on the form structure, output modes, and core product behaviour.</p>
+              <p>Once I was confident the generation logic was solid, I migrated to the Next.js and FastAPI architecture. That migration also surfaced several real engineering problems: CORS configuration between two deployed services, environment variable management across Vercel and Render, and frontend hydration quirks from browser extensions interfering with the dev environment.</p>
+            </div>
+          </div>
+
+          <div class="cs-section">
+            <div class="cs-section-title">Privacy as a Technical Decision</div>
+            <div class="cs-section-text">
+              <p>When I added saved du'as, the default approach would have been a user accounts system and backend storage. I chose browser localStorage instead.</p>
+              <p>This was a deliberate tradeoff: no accounts, no server-side storage of personal prayers, no cross-device sync. The decision aligned with the product's emotional tone. These are private prayers. They should stay on the device unless the user explicitly copies them elsewhere.</p>
+            </div>
+          </div>
+
+          <div class="cs-section reveal full-width">
+            <div class="cs-section-title">What This Project Demonstrates</div>
+            <div class="cs-section-text">
+              <p>This is not just an API wrapper. The value of the system comes from decisions made at the architecture level: separating Name matching from generation, constraining model behaviour through prompt structure, designing the input fields to give the model better context, and treating deployment as a real engineering problem rather than an afterthought.</p>
+              <p>Good AI integration is mostly system design around the model. The model is one component. The rest is up to the engineer.</p>
+            </div>
+            <div class="cs-metrics" style="margin-top:20px;">
+              <div class="cs-metric">
+                <span class="cs-metric-num">2</span>
+                <div class="cs-metric-label">Cloud platforms deployed</div>
+              </div>
+              <div class="cs-metric">
+                <span class="cs-metric-num">Full</span>
+                <div class="cs-metric-label">Frontend + backend separation</div>
+              </div>
+              <div class="cs-metric">
+                <span class="cs-metric-num">0</span>
+                <div class="cs-metric-label">User data stored server-side</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CASE STUDY 2 — NEUROSTUDY BUDDY -->
       <div id="neurostudy" class="case-study">
 
         <div class="case-study-header">
@@ -1769,7 +1922,7 @@
 
           <!-- OVERVIEW -->
 
-          <div class="cs-section full-width">
+          <div class="cs-section reveal full-width">
             <div class="cs-section-title">Overview</div>
 
             <div class="cs-section-text">
@@ -1806,7 +1959,7 @@
 
           <!-- PRODUCT SNAPSHOT -->
 
-          <div class="cs-section full-width">
+          <div class="cs-section reveal full-width">
             <div class="cs-section-title">Product Snapshot</div>
 
             <div class="cs-section-text">
@@ -1908,7 +2061,7 @@
 
           <!-- CONSTRAINTS -->
 
-          <div class="cs-section full-width">
+          <div class="cs-section reveal full-width">
             <div class="cs-section-title">Constraints</div>
 
             <div class="cs-section-text">
@@ -1932,7 +2085,8 @@
               </p>
 
               <p>
-               An AI study companion built with the OpenAI API and prompt engineering. Designed to reduce reading friction for students with ADHD and dyslexia by transforming dense academic language into clearer explanations — without losing meaning.
+                Prompt design and repeated testing were therefore critical to ensure explanations stayed faithful to the
+                source material.
               </p>
 
             </div>
@@ -1941,7 +2095,7 @@
 
           <!-- PRODUCT DECISIONS -->
 
-          <div class="cs-section full-width">
+          <div class="cs-section reveal full-width">
             <div class="cs-section-title">Product Decisions</div>
 
             <div class="cs-section-text">
@@ -1975,7 +2129,7 @@
 
           <!-- OUTCOME -->
 
-          <div class="cs-section full-width">
+          <div class="cs-section reveal full-width">
             <div class="cs-section-title">Outcome & Impact</div>
 
             <div class="cs-section-text">
@@ -2020,7 +2174,7 @@
 
           <!-- LEARNINGS -->
 
-          <div class="cs-section full-width">
+          <div class="cs-section reveal full-width">
             <div class="cs-section-title">Key Learnings</div>
 
             <div class="cs-section-text">
@@ -2099,7 +2253,7 @@
 
           <!-- OVERVIEW -->
 
-          <div class="cs-section full-width">
+          <div class="cs-section reveal full-width">
             <div class="cs-section-title">Overview</div>
 
             <div class="cs-section-text">
@@ -2135,7 +2289,7 @@
 
           <!-- PRODUCT SNAPSHOT -->
 
-          <div class="cs-section full-width">
+          <div class="cs-section reveal full-width">
             <div class="cs-section-title">Product Snapshot</div>
 
             <div class="cs-section-text">
@@ -2237,7 +2391,7 @@
 
           <!-- CONSTRAINTS -->
 
-          <div class="cs-section full-width">
+          <div class="cs-section reveal full-width">
             <div class="cs-section-title">Constraints</div>
 
             <div class="cs-section-text">
@@ -2270,7 +2424,7 @@
 
           <!-- PRODUCT DECISIONS -->
 
-          <div class="cs-section full-width">
+          <div class="cs-section reveal full-width">
             <div class="cs-section-title">Product Decisions</div>
 
             <div class="cs-section-text">
@@ -2305,7 +2459,7 @@
 
           <!-- OUTCOME -->
 
-          <div class="cs-section full-width">
+          <div class="cs-section reveal full-width">
             <div class="cs-section-title">Outcome & Impact</div>
 
             <div class="cs-section-text">
@@ -2357,7 +2511,7 @@
 
           <!-- LEARNINGS -->
 
-          <div class="cs-section full-width">
+          <div class="cs-section reveal full-width">
             <div class="cs-section-title">Key Learnings</div>
 
             <div class="cs-section-text">
@@ -2439,7 +2593,7 @@
 
           <!-- OVERVIEW -->
 
-          <div class="cs-section full-width">
+          <div class="cs-section reveal full-width">
             <div class="cs-section-title">Overview</div>
 
             <div class="cs-section-text">
@@ -2474,7 +2628,7 @@
 
           <!-- PRODUCT SNAPSHOT -->
 
-          <div class="cs-section full-width">
+          <div class="cs-section reveal full-width">
             <div class="cs-section-title">Product Snapshot</div>
 
             <div class="cs-section-text">
@@ -2593,7 +2747,7 @@
 
           <!-- CONSTRAINTS -->
 
-          <div class="cs-section full-width">
+          <div class="cs-section reveal full-width">
             <div class="cs-section-title">Constraints</div>
 
             <div class="cs-section-text">
@@ -2636,7 +2790,7 @@
 
           <!-- PRODUCT DECISIONS -->
 
-          <div class="cs-section full-width">
+          <div class="cs-section reveal full-width">
             <div class="cs-section-title">Product Decisions</div>
 
             <div class="cs-section-text">
@@ -2680,7 +2834,7 @@
 
           <!-- OUTCOME -->
 
-          <div class="cs-section full-width">
+          <div class="cs-section reveal full-width">
             <div class="cs-section-title">Outcome & Impact</div>
 
             <div class="cs-section-text">
@@ -2737,7 +2891,7 @@
 
           <!-- LEARNINGS -->
 
-          <div class="cs-section full-width">
+          <div class="cs-section reveal full-width">
             <div class="cs-section-title">Key Learnings</div>
 
             <div class="cs-section-text">
@@ -2776,7 +2930,7 @@
         simply satisfy curiosity.</p>
       <div class="divider"></div>
 
-      <div class="lab-card">
+      <div class="lab-card reveal">
         <div class="lab-card-title">Prompt Engineering for Learning Accessibility</div>
         <div class="lab-card-desc">
           I experimented with different prompt structures to see how AI models could simplify dense academic text
@@ -2793,7 +2947,7 @@
         </div>
       </div>
 
-      <div class="lab-card">
+      <div class="lab-card reveal">
         <div class="lab-card-title">Attention Detection with Computer Vision</div>
         <div class="lab-card-desc">
           I explored whether lightweight computer vision techniques could detect when a student’s attention drifts
@@ -2811,7 +2965,7 @@
         </div>
       </div>
 
-      <div class="lab-card">
+      <div class="lab-card reveal">
         <div class="lab-card-title">Mapping Government Service Journeys</div>
         <div class="lab-card-desc">
           As part of the ClearPath concept project, I mapped citizen journeys across public service applications to
@@ -2828,7 +2982,7 @@
         </div>
       </div>
 
-      <div class="lab-card">
+      <div class="lab-card reveal">
         <div class="lab-card-title">Onboarding Friction Audit</div>
         <div class="lab-card-desc">
           I analysed a client onboarding journey step by step to identify where users become confused, drop off, or
@@ -2846,7 +3000,7 @@
         </div>
       </div>
 
-      <div class="lab-card">
+      <div class="lab-card reveal">
         <div class="lab-card-title">AI Explanation vs AI Summary</div>
         <div class="lab-card-desc">
           I compared two ways AI might help students process difficult academic material: summarisation versus
@@ -2865,7 +3019,7 @@
         </div>
       </div>
 
-      <div class="lab-card">
+      <div class="lab-card reveal">
         <div class="lab-card-title">Mobile-First Form Design</div>
         <div class="lab-card-desc">
           I explored how government-style application forms behave on smaller screens by redesigning a multi-step form
@@ -2892,7 +3046,7 @@
       <div class="divider"></div>
 
       <div class="writing-list">
-        <div class="writing-card" onclick="openPanel('wr1')">
+        <div class="writing-card reveal" onclick="openPanel('wr1')">
 
           <div class="writing-meta">
             <div class="writing-time">7 min read</div>
@@ -3054,29 +3208,64 @@
   <script>
     // ── DATA ──
     const panelData = {
-      pw1: {
-        cat: 'AI EdTech · Accessibility',
-        title: 'NeuroStudy Buddy',
-        subtitle: 'AI study companion for simplifying complex academic text',
+      pw_dua: {
+        cat: 'Full-Stack · AI Integration · Islamic Tech',
+        title: "Du'a Companion",
+        subtitle: 'Full-stack AI web app: Next.js frontend, FastAPI backend, deployed on Vercel and Render',
         sections: [
           {
-            label: 'Context',
-            text: 'NeuroStudy Buddy began as an exploration of how AI could support students who struggle with dense academic material. Many learning resources assume strong reading fluency, which creates barriers for students with dyslexia or attention difficulties.'
+            label: 'What I Built',
+            text: "A full-stack web application that generates personalised Islamic du'as based on structured emotional input. The user describes what they're carrying — their request, fear, burden, and desired outcome — and the system selects relevant Names of Allah, explains each choice, and generates a du'a written in honest, natural language."
           },
           {
-            label: 'Problem',
-            text: 'Academic content is often written in language that is difficult to process quickly. Instead of focusing on understanding the concept, students can spend most of their energy decoding the wording.'
+            label: 'Architecture',
+            text: "Next.js and TypeScript frontend hosted on Vercel. FastAPI Python backend hosted on Render. The backend handles all generation logic: receiving structured input, running the Name matching layer, building the prompt, calling the OpenAI API, parsing the output, and returning a clean response. The frontend handles state, form flow, and display. Clean separation by design."
           },
           {
-            label: 'My Role',
-            text: 'I designed and built the working prototype, defined the product direction, and experimented with AI prompt design to simplify academic language while preserving meaning.'
+            label: 'The Name Matching System',
+            text: "I built a deterministic Python matching layer rather than letting the model freely select Names. Each Name has associated themes, keywords, implicit phrase patterns, and exclusion rules. This layer solves a real problem: without it, the model makes loose or spiritually off choices. I iterated on the matcher to handle ambiguous keywords, contextual exclusions, and human phrasing patterns that keyword matching alone would miss."
           },
           {
-            label: 'Key Decisions',
-            text: 'The product focused on a single capability: transforming dense academic text into clearer explanations. Keeping the interface minimal reduced cognitive load and ensured the product solved one meaningful problem well.'
+            label: 'Prompt Engineering',
+            text: "The system prompt constrains writing behaviour tightly: no generic religious filler, no ornate prose, no introducing themes the user did not mention, shorter lines that feel spoken rather than written. Output is wrapped in parse markers so the frontend can extract it cleanly. The hardest iteration was getting the model to stop drifting into inspirational language and stay emotionally honest instead."
+          },
+          {
+            label: 'Key Technical Decisions',
+            text: "Prototyped in Streamlit to validate product logic before investing in frontend work. Migrated to Next.js and FastAPI once the core behaviour was solid. Used browser localStorage for saved du'as to preserve privacy and avoid server-side storage of personal prayers. Chose deployment separation (Vercel + Render) so each service could be scaled or updated independently."
+          },
+          {
+            label: 'Problems Solved',
+            text: "Prompt drift toward generic language. False-positive theme matching on ambiguous keywords. CORS wiring between frontend and backend services. Environment variable management across two deployment platforms. Hydration quirks during frontend setup. State management for multi-step form with regenerate and edit flows."
           }
         ],
-        tools: ['OpenAI API', 'Python', 'Streamlit', 'Prompt Design'],
+        tools: ['Python', 'FastAPI', 'Next.js', 'TypeScript', 'Tailwind CSS', 'OpenAI API', 'Vercel', 'Render', 'localStorage'],
+        cta: 'View Full Case Study',
+        ctaPage: 'case-studies',
+        ctaSection: 'dua-companion'
+      },
+      pw1: {
+        cat: 'AI EdTech · Python · OpenAI API',
+        title: 'NeuroStudy Buddy',
+        subtitle: 'AI prototype built with Python, Streamlit, and the OpenAI API',
+        sections: [
+          {
+            label: 'What I Built',
+            text: 'A working AI prototype using Python, Streamlit, and the OpenAI API. Students paste dense academic text into the interface and receive a simplified explanation. The product focused on a single capability, built to validate whether the prompt architecture and output quality were strong enough before investing in a full frontend.'
+          },
+          {
+            label: 'Technical Decisions',
+            text: 'The core engineering challenge was prompt design. Academic text simplification is easy to get wrong — models tend to either strip too much meaning or produce output that is just slightly less dense than the original. I iterated on the system prompt structure to enforce natural language, preserve the original concept, and remove unnecessary complexity without losing accuracy.'
+          },
+          {
+            label: 'Stack',
+            text: 'Python, Streamlit, OpenAI API. Streamlit was a deliberate choice for the prototype phase: it let me iterate quickly on the input structure, output format, and prompt behaviour without building a full frontend first.'
+          },
+          {
+            label: 'What I Learned',
+            text: 'That the quality of AI output is mostly determined before you make the API call. The prompt structure, the input fields you expose to the user, and the constraints you enforce in the system prompt do more than the model itself. That lesson shaped how I approached every AI integration since.'
+          }
+        ],
+        tools: ['Python', 'Streamlit', 'OpenAI API', 'Prompt Engineering'],
         cta: 'View Full Case Study',
         ctaPage: 'case-studies',
         ctaSection: 'neurostudy'
@@ -3392,6 +3581,169 @@
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closePanel();
     });
+
+    // ── ANIMATIONS ──
+
+    // 1. PARTICLES
+    (function () {
+      const canvas = document.getElementById('particles-canvas');
+      const ctx = canvas.getContext('2d');
+      let W, H, particles;
+      const COUNT = 55;
+      const PURPLE = '155, 127, 232';
+
+      function resize() {
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
+      }
+
+      function makeParticle() {
+        return {
+          x: Math.random() * W,
+          y: Math.random() * H,
+          r: Math.random() * 1.6 + 0.4,
+          vx: (Math.random() - 0.5) * 0.18,
+          vy: (Math.random() - 0.5) * 0.18,
+          alpha: Math.random() * 0.4 + 0.1
+        };
+      }
+
+      function init() {
+        resize();
+        particles = Array.from({ length: COUNT }, makeParticle);
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        particles.forEach(p => {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${PURPLE}, ${p.alpha})`;
+          ctx.fill();
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < -5) p.x = W + 5;
+          if (p.x > W + 5) p.x = -5;
+          if (p.y < -5) p.y = H + 5;
+          if (p.y > H + 5) p.y = -5;
+        });
+
+        // Draw faint connection lines between nearby particles
+        for (let i = 0; i < particles.length; i++) {
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 110) {
+              ctx.beginPath();
+              ctx.moveTo(particles[i].x, particles[i].y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = `rgba(${PURPLE}, ${0.06 * (1 - dist / 110)})`;
+              ctx.lineWidth = 0.6;
+              ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(draw);
+      }
+
+      window.addEventListener('resize', resize);
+      init();
+      draw();
+    })();
+
+    // 2. SCROLL REVEAL
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    function initReveal() {
+      // Add stagger delays to card grids
+      document.querySelectorAll('.card-grid, .lab-grid').forEach(grid => {
+        grid.querySelectorAll('.reveal').forEach((el, i) => {
+          el.classList.add(`reveal-delay-${Math.min(i + 1, 6)}`);
+        });
+      });
+      document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    }
+
+    // Re-run reveal init when page changes
+    const origNavigate = navigate;
+    window.navigate = function (pageId, el, sectionId) {
+      origNavigate(pageId, el, sectionId);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+            revealObserver.observe(el);
+          });
+          initSkillBars();
+          initStats();
+        });
+      });
+    };
+
+    // 3. SKILL BARS
+    const skillBarObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const fill = entry.target;
+          const target = fill.getAttribute('data-width');
+          if (target) {
+            requestAnimationFrame(() => { fill.style.width = target; });
+          }
+          skillBarObserver.unobserve(fill);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    function initSkillBars() {
+      document.querySelectorAll('.skill-fill[data-width]').forEach(el => {
+        skillBarObserver.observe(el);
+      });
+    }
+
+    // 4. STAT COUNTERS
+    function animateCount(el, target, suffix, duration) {
+      const start = performance.now();
+      const isFloat = target % 1 !== 0;
+      function update(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = isFloat
+          ? (eased * target).toFixed(1)
+          : Math.floor(eased * target);
+        el.textContent = current + suffix;
+        if (progress < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    }
+
+    function initStats() {
+      document.querySelectorAll('.stat-num').forEach(el => {
+        const text = el.textContent.trim();
+        const match = text.match(/^(\d+\.?\d*)(\+|k)?/);
+        if (!match) return;
+        const num = parseFloat(match[1]);
+        const suffix = match[2] || '';
+        el.textContent = '0' + suffix;
+        animateCount(el, num, suffix, 1400);
+      });
+    }
+
+    // Initialise everything on load
+    document.addEventListener('DOMContentLoaded', () => {
+      initReveal();
+      initSkillBars();
+      // Stat counters only fire on home page load
+      setTimeout(initStats, 700);
+    });
+
   </script>
 </body>
 
